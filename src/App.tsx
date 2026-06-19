@@ -71,6 +71,8 @@ export default function App() {
     boardingTime: string;
   } | null>(null);
 
+  const [notification, setNotification] = useState<string | null>(null);
+
   // Load from local storage on mount
   useEffect(() => {
     try {
@@ -338,7 +340,7 @@ export default function App() {
     if (!flight) return;
 
     if (flight.seatsRemaining <= 0) {
-      alert(`Dispatch Error: Cabin capacity exhausted for Routing ${flight.flightNo}`);
+      setNotification(`Dispatch Notification: Route ${flight.flightNo} has been closed due to complete seat allocation.`);
       return;
     }
 
@@ -652,6 +654,26 @@ export default function App() {
             </div>
 
           </div>
+        </div>
+      )}
+
+      {notification && (
+        <div className="fixed bottom-6 right-6 z-50 bg-[#121212] border-2 border-vermilion p-4 rounded-lg shadow-2xl max-w-sm flex flex-col gap-2">
+          <div className="flex items-center justify-between gap-4">
+            <h4 className="font-serif font-bold text-sm text-bone-white uppercase tracking-wider flex items-center gap-1.5">
+              <ShieldAlert className="w-4 h-4 text-vermilion" /> System Alert
+            </h4>
+            <button onClick={() => setNotification(null)} className="text-gray-500 hover:text-white transition-colors">
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          <p className="text-xs text-gray-400 font-sans leading-relaxed">{notification}</p>
+          <button
+            onClick={() => setNotification(null)}
+            className="mt-2 bg-vermilion text-white font-bold py-1 px-3 rounded text-[11px] self-end hover:bg-vermilion/90 transition-all font-sans"
+          >
+            Confirm
+          </button>
         </div>
       )}
 
