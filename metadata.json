@@ -1,0 +1,6 @@
+{
+  "name": "Dynamic Pricing Engine",
+  "description": "A real-time flight pricing dispatch engine governed by dynamic demand formulas, seasonal trends, and custom simulations, featuring price charts and price freeze locks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
